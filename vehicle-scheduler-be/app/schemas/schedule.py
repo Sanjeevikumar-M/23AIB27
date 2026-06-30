@@ -3,7 +3,7 @@ from typing import List
 
 class Depot(BaseModel):
     ID: int
-    MachanicHours: int
+    MechanicHours: int  # Fixed spelling to match external API response
 
 class Vehicle(BaseModel):
     TaskID: str
@@ -18,7 +18,7 @@ class VehicleListResponse(BaseModel):
 
 class ScheduledDepotResult(BaseModel):
     depot_id: int
-    machanic_hours_budget: int
+    mechanic_hours_budget: int  # Fixed spelling to match
     hours_used: int
     total_impact_score: int
     scheduled_tasks: List[str]
@@ -28,4 +28,3 @@ class ScheduleSummaryResponse(BaseModel):
     total_allocated_hours: int
     total_impact_score: int
     results: List[ScheduledDepotResult]
-    
