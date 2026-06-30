@@ -12,7 +12,7 @@ class SchedulerService:
             v = vehicles[i-1]
             for w in range(budget + 1):
                 if v.Duration <=w:
-                    dp[i][w] = max(dp[i-1][w],dp[i-1][w-v.Duration]+)
+                    dp[i][w] = max(dp[i-1][w],dp[i-1][w-v.Duration]+v.Impact)
                 else:
                     dp[i][w] = dp[i-1][w]
         selected_task_ids = []

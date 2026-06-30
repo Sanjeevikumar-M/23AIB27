@@ -16,16 +16,16 @@ class DepotListResponse(BaseModel):
 class VehicleListResponse(BaseModel):
     vehicles: List[Vehicle]
 
-class ScheduleDepotList(BaseModel):
+class ScheduledDepotResult(BaseModel):
     depot_id: int
     machanic_hours_budget: int
     hours_used: int
     total_impact_score: int
-    scheduled_task: List[str]
+    scheduled_tasks: List[str]
 
 class ScheduleSummaryResponse(BaseModel):
     total_depots: int
     total_allocated_hours: int
     total_impact_score: int
-    results: List[ScheduleDepotList]
+    results: List[ScheduledDepotResult]
     
