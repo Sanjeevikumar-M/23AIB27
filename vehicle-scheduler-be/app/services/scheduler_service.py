@@ -25,3 +25,34 @@ class SchedulerService:
                 w -= vehicles[i - 1].Duration
         
         return dp[n][budget],selected_task_ids,total_duration
+
+    def schedule_depots(self, depots: List[Depot], vehicles: List[Vehicle]) -> Dict[str, Any]:
+        results = []
+        total_impact = 0
+        total_hours = 0
+
+        available_vehicles = list(vehicles)
+
+        for depot in depots:
+            total_hours += depot.MachanicHours
+            max_impact,selected_task,hours_used = self.solve_knapsack(available_vehicles,depot.MachanicHours)
+
+            available_vehicles = [v for v in available_vehicles if v.TaskID not in selected_task]
+
+            results.append(
+                ScheduledDepotResult(
+                    depot_id=depot.ID,
+                    mechanic_hours_budget=depot.MachanicHours,
+                    hours_used=hours_used,
+                    total_impact_score=max_impact,
+                    scheduled_tasks=selected_task
+                )
+            )
+            total_impact += max_impact
+
+        return {
+            "total_depots": len(depots),
+            "total_allocated_hours": total_hours,
+            "total_impact_score": total_impact,
+            "results":results
+        }
